@@ -1,0 +1,26 @@
+= Bueda/Flickr API Mashup
+
+* Project Website - http://bueda.com/flickr
+
+== Description
+
+The Bueda API knows tags, and Flickr has a lot of tags. We think they're a good
+match, so we created a simple mashup of the Bueda and Flickr API to showcase
+semantic enrichment of your tags. Submitting your Flickr username in the form
+below, and we'll show you how the Bueda API can help improve your tags. Don't
+worry - we don't (and can't) modify the tags of your photos, it's just a
+demonstration.
+
+You can also query this URL and ask for JSON (set the HTTP Accept header to
+"application/json"). You'll get the same content in a machine readable format,
+ready for a triple-decker mashup.
+
+== External Dependencies
+* Python (tested with 2.6.4)
+* Django (tested with 1.1)
+* flickrapi (tested with 1.4.2)
+* simplejson (tested with 2.0.9)
+* bueda (tested with 0.1.2)
+
+=== Development Requirements
+* nose (tested with 0.11.1)

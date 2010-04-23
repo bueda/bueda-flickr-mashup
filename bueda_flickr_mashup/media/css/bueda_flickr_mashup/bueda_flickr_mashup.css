@@ -1,0 +1,30 @@
+#flickr-results {
+  text-align: left;
+}
+
+#flickr-results ul {
+  padding: 5px;
+  list-style-type: none;
+}
+
+#flickr-results h3 {
+  padding: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#flickr-results div.photo {
+  padding: 5px;
+  clear: both;
+  float: none;
+}
+
+#flickr-results div {
+  padding: 5px;
+  float: left;
+}
+
+#flickr-results img {
+  padding: 5px;
+  float: left;
+}

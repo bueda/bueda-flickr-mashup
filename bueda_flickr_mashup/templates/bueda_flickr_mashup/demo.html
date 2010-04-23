@@ -1,0 +1,58 @@
+{% extends "base.html" %} 
+{% block headcontent %}
+<link href="{{ MEDIA_URL }}css/bueda_flickr_mashup/bueda_flickr_mashup.css"
+    rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+<h1>Flickr Photostream Enhancer</h1>
+
+<p>The Bueda API knows tags, and <a href="http://flickr.com">Flickr</a> has a
+lot of tags. We think they're a good match, so we created a simple mashup of the
+<a href="http://api.bueda.com">Bueda</a> and <a
+href="http://www.flickr.com/services/api/">Flickr API</a> to showcase semantic
+enrichment of your tags. Submitting your Flickr username in the form below,
+and we'll show you how the Bueda API can help improve your tags. Don't worry -
+we don't (and can't) modify the tags of your photos, it's just a demonstration.</p>
+
+<p>You can also query this URL and ask for JSON (set the HTTP Accept header to
+"application/json"). You'll get the same content in a machine readable format,
+ready for a triple-decker mashup.</p>
+
+<p> We have also released the source code for this as a pluggable <a
+href="http://djangoproject.com">Django</a> app that can be dropped into any
+existing Django project. Why don't you <a
+href="http://github.com/bueda/bueda-flickr-mashup">fork it on GitHub?</a> </p>
+
+<form>
+    <input name="username" type="text" id="queryInput" maxlength="200"/>
+    <input name="submit" type="submit" value="Enrich Photostream">
+</form>
+
+<div id="flickr-results">
+  {% for photo in photos %}
+    <div class="photo">
+      <a href="{{ photo.page_url }}">
+        <img src="{{ photo.img_url }}">
+      </a>
+      <div>
+        <h3>Original Tags</h3>
+        <ul>
+          {% for tag in photo.original_tags %}
+            <li>{{ tag }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h3>Enriched Tags & Categories</h3>
+        <ul>
+          {% for tag in photo.tags %}
+            <li>{{ tag }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
