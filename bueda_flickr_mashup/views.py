@@ -13,13 +13,36 @@ def demo(request):
         settings.FLICKR_API_SECRET)       
 
     username = request.GET.get('username', '')
+    
+    # If username is specified in the request
     if username:
-        response = flickr_conn.people_findByUsername(
-                username=request.GET.get('username', ''))
+
+        try:
+            response = flickr_conn.people_findByUsername(
+                    username=request.GET.get('username', ''))
+
+        # If username is not found on flickr
+        except flickrapi.exceptions.FlickrError:
+            return direct_to_template(
+                request,
+                'bueda_flickr_mashup/templates/bueda_flickr_mashup/demo.html',
+                {'error_message':'The given username does not exist. Please be sure to enter the username and not user alias'}
+            )
+
+
         user_id = response.find('user').attrib['id']
 
         response = flickr_conn.people_getPublicPhotos(user_id=user_id)
         public_photos = response.find('photos').findall('photo')[0:5]
+
+        if not public_photos:
+            return direct_to_template(
+                request,
+                'bueda_flickr_mashup/templates/bueda_flickr_mashup/demo.html',
+                {'error_message':'The user does not have any public photos'}
+            )
+
+
         enriched_photos = []
         for photo in public_photos:
             photo_id = photo.attrib['id']
@@ -61,4 +84,5 @@ def demo(request):
           return HttpResponseBadRequest(mimetype='application/json')
       else:
           return direct_to_template(request,
-                'bueda_flickr_mashup/templates/bueda_flickr_mashup/demo.html')
+                'bueda_flickr_mashup/templates/bueda_flickr_mashup/demo.html',
+                {'error_message':'Please enter the username'})

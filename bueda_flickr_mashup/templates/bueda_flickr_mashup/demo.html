@@ -24,7 +24,8 @@ href="http://djangoproject.com">Django</a> app that can be dropped into any
 existing Django project. Why don't you <a
 href="http://github.com/bueda/bueda-flickr-mashup">fork it on GitHub?</a> </p>
 
-<form>
+<p class="error">{{ error_message }}</p>
+<form action="{% url flickr:run %}">
     <input name="username" type="text" id="queryInput" maxlength="200"/>
     <input name="submit" type="submit" value="Enrich Photostream">
 </form>

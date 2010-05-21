@@ -28,3 +28,7 @@
   padding: 5px;
   float: left;
 }
+
+p.error {
+    color:red;
+}
